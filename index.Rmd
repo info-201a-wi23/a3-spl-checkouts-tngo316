@@ -1,86 +1,120 @@
 ---
-title: "A3: SPL Library Checkouts"
+title: "The Future of Reading"
 output: html_document
 ---
+library("dplyr")
+library("stringr")
+library("ggplot2")
+my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE)
 
 ### Introduction
+# An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
 
-An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+The rise of digital technology as changed the way we consume media, and the publishing industry is no exception.
+With growing trends of ebooks, many companies have started publishing books online for readers to download and access.
+Additionally, there are online companies such as Audible that produces spoken audio content. To say that the medium in which
+we consume media is an understatement. 
+
+In this report, we will look at recent shifts and patterns from video discs, sound discs, physical books to ebooks.
+This report aims to provide a comprehensive overview of the current state of the book market and the growing trend towards ebooks. 
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+# Were people using a digital platform or physical platform for books?
+total_digital_usage <- my_dataSet %>% filter(UsageClass == "Digital")
 
-These will likely be calculated using your DPLYR skills, answering questions such as:
+total_physical_usage <- my_dataSet %>% filter(UsageClass == "Physical")
 
-- What is the average number of checkouts for each item?
-- What is the month or year with the most/least checkouts for a book that you're interested in?
-- What is the month or year with the most/least checkouts for ebooks?
-- How has the number of print book checkouts changed over time?
+# How many total checkouts were there total from 2022-2023?
+total_checkouts <- my_dataSet %>% summarize(total_all = sum(Checkouts))
 
-Feel free to calculate and report values that you find relevant.
+# How many ebook checkouts were there from 2022-2023?
+total_ebook_checkouts <- my_dataSet %>% filter(MaterialType == "EBOOK") %>%
+summarize(total_ebook = sum(Checkouts))
+
+answer1 <- total_ebook_checkouts/ total_checkouts
+return(answer1)
+
+# How many physical book checkouts were there from 2022-2023?
+total_book_checkouts <- my_dataSet %>% filter(MaterialType == "BOOK") %>%
+summarize(total_book = sum(Checkouts))
+
+answer2 <- total_book_checkouts/ total_checkouts
+return(answer2)
+
+# How many audio book checkouts were there from 2022-2023?
+total_audiobook_checkouts <- my_dataSet %>% filter(MaterialType == "AUDIOBOOK") %>%
+summarize(total_audiobook = sum(Checkouts))
+
+answer3 <- total_audiobook_checkouts/ total_checkouts
+return(answer3)
+
+# How many sound disc checkouts were there from 2022-2023?
+total_sounddisc_checkouts <- my_dataSet %>% filter(MaterialType == "SOUNDDISC") %>%
+summarize(total_sounddisc = sum(Checkouts))
+
+answer4 <- total_sounddisc_checkouts/ total_checkouts
+return(answer4)
+
+# How many video disc checkouts were there from 2022-2023?
+total_videodisc_checkouts <- my_dataSet %>% filter(MaterialType == "VIDEODISC") %>%
+summarize(total_videodisc = sum(Checkouts))
+
+answer5 <- total_videodisc_checkouts/ total_checkouts 
+return(answer5)
+
+With our findings, it will help us draw closer to a conclusion. The first method finds
+out whether the item being checked out was either physical or digital (falls into one or the other). With this we can see that for digital items there was 1,331,024 and for physical it was
+1,425,990. My next method obtains the total number of checkouts from all the various types of forms. We know from this method that there were 9,196,991 checkouts from all of 2022 through the first month of 2023 in the Seattle area. Now this number allows us to compare the percentage in which each checkout was from. For video discs, there was a total of 623,259 checkouts which in comparison to total checkouts, video discs makes up 6.78% of total checkout from the data. For sound discs, there was a total of 202,984 which makes up only 2.20% of total checkouts. Next, audio books took 23.40% of all total checkouts. For physical books, there was a total of 3,147,727 checkouts which acquaints for 34.23% of all checkouts. Lastly, with ebooks, there were
+2,989,063 checkouts making up 32.50%. These numbers help us make note of which form is most popular amongst the Seattle demographic. It also gives us a glimpse of potential trends and shifts in reading.
+
 
 ### The Dataset
 
-- Who collected/published the data?  
+- Who collected/published the data?
+This data is published from the Seattle Public Library.
+
 - What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
-- How was the data collected or generated?  
-- Why was the data collected?  
-- What, if any, ethical questions do you need to consider when working with this data?  
+The parameters of this data includes usage class, checkout type, material type, checkout year, checkout month,
+checkouts, title, ISBN, creator, subjects, publisher, and publication year.
+
+- How was the data collected or generated?
+The data was collected through various ways. An example is through book checkouts in Seattle libraries. 
+
+- Why was the data collected?
+As stated on the SPL website, the data was collected to "build our collections to reflect current trends
+and changing community needs..." 
+
+- What, if any, ethical questions do you need to consider when working with this data? 
+As with most data, there is a privacy concern. Is there a violation of privacy if whatever book we are checking out
+is kept in database. Is this data being used for what it was intended to be used for? 
+
 - What are possible limitations or problems with this data?   (at least 200 words)
 
 
 ### First Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+This first chart here below shows the total checkouts of ebooks versus physical books in just 2022 alone. As we can see, without looking to0 closely here that there are various months where ebooks have had a higher checkout. Despite this, there were other times where physical book checkouts were higher. This chart is an indicator of a shift to a more digital platform that readers are leaning towards. 
 
-The first chart that you will create and include will show the trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
 
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_example.R")}
+``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_SPL.R")}
+chart1 
 ```
 
 ### Second Trends Over Time Chart
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+The chart below shows clearly the ups and downs between the months in checkouts. This map is great because we can visually see that before 2023, both audio books and ebooks are taking an upwards trajectory whereas physical books are taking a downward trajectory. Additionally, this graph shows us how similar the total number of ebooks and books checkouts are. 
 
-The second chart that you will create and include will show another trend over time of your variable/topic/interest. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
-
-- Show more than one, but fewer than ~10 trends
-  - For example, two books, or 5 different mediums
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear - legend title
-In your .Rmd file, make sure to describe why you included the chart, and what patterns emerged
-
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, code = readLines("chart2_SPL.R")}
+chart2
 ```
 
 ### Your Choice
 
-The last chart is up to you. It could be a line plot, scatter plot, histogram, bar plot, stacked bar plot, and more. Here are some requirements to help guide your design:
+With my last chart, I wanted to compare the total checkouts by all other forms. In this we can see that sound disc and video disc are slowly starting to fall off the radar. It appears that ebooks, books, and audio books, are the most common medium in which readers read with. Years ago, this bar graph would most likely look a lot more different than how it is now.
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
-
-Here's an example of how to run an R script inside an RMarkdown file:
-
-``````{r, echo = FALSE, code = readLines("chart2_example.R")}
+``````{r, echo = FALSE, code = readLines("chart3_SPL.R")}
+chart3
 ```
 
 
