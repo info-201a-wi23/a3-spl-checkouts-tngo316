@@ -18,6 +18,7 @@ This report aims to provide a comprehensive overview of the current state of the
 
 ## Summary Information
 #####my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE)
+
 # Were people using a digital platform or physical platform for books?
 total_digital_usage <- my_dataSet %>% filter(UsageClass == "Digital")
 
@@ -88,6 +89,11 @@ is kept in database. Is this data being used for what it was intended to be used
 
 - What are possible limitations or problems with this data?   (at least 200 words). 
 Like mentioned above, there could be potential problems with privacy concerns. Some people might not want to have others know what books they are reading or what books they like to read. Additionally, there is limitation as this data set is just for the Seattle area. Another data set in New York or Florida could be completely different. This makes the data set not representative of the United States but just solely for Seattle. Another problem with this data set is that even though it accounts for checkouts, doesn't necessarily mean that people are reading the full book, some may read a chapter and dislike it then return it. 
+
+ncol(my_dataSet)
+12 columns
+nrow(my_dataSet)
+2,757,014 rows 
 
 ### First Trends Over Time Chart
 
