@@ -2,13 +2,11 @@
 title: "The Future of Reading"
 output: html_document
 ---
-library("dplyr")
-library("stringr")
-library("ggplot2")
-my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE)
+###library("dplyr")
+###library("stringr")
+###library("ggplot2")
 
-### Introduction
-# An introduction of the data and a description of the trends/books/items you are choosing to analyze (and why!)
+## Introduction
 
 The rise of digital technology as changed the way we consume media, and the publishing industry is no exception.
 With growing trends of ebooks, many companies have started publishing books online for readers to download and access.
@@ -18,45 +16,45 @@ we consume media is an understatement.
 In this report, we will look at recent shifts and patterns from video discs, sound discs, physical books to ebooks.
 This report aims to provide a comprehensive overview of the current state of the book market and the growing trend towards ebooks. 
 
-### Summary Information
-
+## Summary Information
+#####my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE)
 # Were people using a digital platform or physical platform for books?
 total_digital_usage <- my_dataSet %>% filter(UsageClass == "Digital")
 
 total_physical_usage <- my_dataSet %>% filter(UsageClass == "Physical")
 
-# How many total checkouts were there total from 2022-2023?
+### How many total checkouts were there total from 2022-2023?
 total_checkouts <- my_dataSet %>% summarize(total_all = sum(Checkouts))
 
-# How many ebook checkouts were there from 2022-2023?
+### How many ebook checkouts were there from 2022-2023?
 total_ebook_checkouts <- my_dataSet %>% filter(MaterialType == "EBOOK") %>%
 summarize(total_ebook = sum(Checkouts))
 
 answer1 <- total_ebook_checkouts/ total_checkouts
 return(answer1)
 
-# How many physical book checkouts were there from 2022-2023?
+### How many physical book checkouts were there from 2022-2023?
 total_book_checkouts <- my_dataSet %>% filter(MaterialType == "BOOK") %>%
 summarize(total_book = sum(Checkouts))
 
 answer2 <- total_book_checkouts/ total_checkouts
 return(answer2)
 
-# How many audio book checkouts were there from 2022-2023?
+### How many audio book checkouts were there from 2022-2023?
 total_audiobook_checkouts <- my_dataSet %>% filter(MaterialType == "AUDIOBOOK") %>%
 summarize(total_audiobook = sum(Checkouts))
 
 answer3 <- total_audiobook_checkouts/ total_checkouts
 return(answer3)
 
-# How many sound disc checkouts were there from 2022-2023?
+### How many sound disc checkouts were there from 2022-2023?
 total_sounddisc_checkouts <- my_dataSet %>% filter(MaterialType == "SOUNDDISC") %>%
 summarize(total_sounddisc = sum(Checkouts))
 
 answer4 <- total_sounddisc_checkouts/ total_checkouts
 return(answer4)
 
-# How many video disc checkouts were there from 2022-2023?
+### How many video disc checkouts were there from 2022-2023?
 total_videodisc_checkouts <- my_dataSet %>% filter(MaterialType == "VIDEODISC") %>%
 summarize(total_videodisc = sum(Checkouts))
 
@@ -68,53 +66,49 @@ out whether the item being checked out was either physical or digital (falls int
 1,425,990. My next method obtains the total number of checkouts from all the various types of forms. We know from this method that there were 9,196,991 checkouts from all of 2022 through the first month of 2023 in the Seattle area. Now this number allows us to compare the percentage in which each checkout was from. For video discs, there was a total of 623,259 checkouts which in comparison to total checkouts, video discs makes up 6.78% of total checkout from the data. For sound discs, there was a total of 202,984 which makes up only 2.20% of total checkouts. Next, audio books took 23.40% of all total checkouts. For physical books, there was a total of 3,147,727 checkouts which acquaints for 34.23% of all checkouts. Lastly, with ebooks, there were
 2,989,063 checkouts making up 32.50%. These numbers help us make note of which form is most popular amongst the Seattle demographic. It also gives us a glimpse of potential trends and shifts in reading.
 
+## The Dataset
 
-### The Dataset
-
-- Who collected/published the data?
+- Who collected/published the data?   
 This data is published from the Seattle Public Library.
 
-- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?
+- What are the parameters of the data (dates, number of checkouts, kinds of books, etc.)?   
 The parameters of this data includes usage class, checkout type, material type, checkout year, checkout month,
 checkouts, title, ISBN, creator, subjects, publisher, and publication year.
 
-- How was the data collected or generated?
+- How was the data collected or generated?   
 The data was collected through various ways. An example is through book checkouts in Seattle libraries. 
 
-- Why was the data collected?
+- Why was the data collected?   
 As stated on the SPL website, the data was collected to "build our collections to reflect current trends
 and changing community needs..." 
 
-- What, if any, ethical questions do you need to consider when working with this data? 
+- What, if any, ethical questions do you need to consider when working with this data?   
 As with most data, there is a privacy concern. Is there a violation of privacy if whatever book we are checking out
 is kept in database. Is this data being used for what it was intended to be used for? 
 
-- What are possible limitations or problems with this data?   (at least 200 words)
-
+- What are possible limitations or problems with this data?   (at least 200 words). 
+Like mentioned above, there could be potential problems with privacy concerns. Some people might not want to have others know what books they are reading or what books they like to read. Additionally, there is limitation as this data set is just for the Seattle area. Another data set in New York or Florida could be completely different. This makes the data set not representative of the United States but just solely for Seattle. Another problem with this data set is that even though it accounts for checkouts, doesn't necessarily mean that people are reading the full book, some may read a chapter and dislike it then return it. 
 
 ### First Trends Over Time Chart
 
 This first chart here below shows the total checkouts of ebooks versus physical books in just 2022 alone. As we can see, without looking to0 closely here that there are various months where ebooks have had a higher checkout. Despite this, there were other times where physical book checkouts were higher. This chart is an indicator of a shift to a more digital platform that readers are leaning towards. 
 
-
 ``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_SPL.R")}
 chart1 
-```
+``````
 
 ### Second Trends Over Time Chart
 
-The chart below shows clearly the ups and downs between the months in checkouts. This map is great because we can visually see that before 2023, both audio books and ebooks are taking an upwards trajectory whereas physical books are taking a downward trajectory. Additionally, this graph shows us how similar the total number of ebooks and books checkouts are. 
+The chart below shows clearly the ups and downs between the months in checkouts. This map is great because we can visually see that before 2023, both sound disc and video discs are taking an downwards trajectory whereas. Additionally, this graph shows us that sound discs and video discs are slowly becoming less and less popular over time.
 
 ``````{r, echo = FALSE, code = readLines("chart2_SPL.R")}
 chart2
-```
+``````
 
-### Your Choice
+### Visual 3
 
 With my last chart, I wanted to compare the total checkouts by all other forms. In this we can see that sound disc and video disc are slowly starting to fall off the radar. It appears that ebooks, books, and audio books, are the most common medium in which readers read with. Years ago, this bar graph would most likely look a lot more different than how it is now.
 
 ``````{r, echo = FALSE, code = readLines("chart3_SPL.R")}
 chart3
-```
-
-
+``````
