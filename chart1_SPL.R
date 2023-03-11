@@ -8,7 +8,7 @@ agg_data2 <- my_dataSet %>%
   group_by(CheckoutYear, CheckoutMonth, MaterialType) %>%
   summarize(TotalCheckouts = sum(Checkouts))
 
-chart1 <- ggplot(agg_data2, aes(x = CheckoutMonth, y = TotalCheckouts, color = MaterialType)) +
+ggplot(agg_data2, aes(x = CheckoutMonth, y = TotalCheckouts, color = MaterialType)) +
   geom_line() +
   labs(x = "Month", y = "Total Checkouts", title = "Trend of Sound discs and Video discs over Time") +
   scale_x_continuous(breaks = seq(1, 12))

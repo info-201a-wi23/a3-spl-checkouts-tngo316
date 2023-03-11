@@ -10,10 +10,10 @@ agg_data <- subset_data %>%
   summarize(TotalCheckouts = sum(Checkouts))
 
 # Create a bar chart
-chart3 <- ggplot(agg_data, aes(x = MaterialType, y = TotalCheckouts, fill = MaterialType)) +
+ggplot(agg_data, aes(x = MaterialType, y = TotalCheckouts, fill = MaterialType)) +
   geom_bar(stat = "identity") +
   labs(x = "Material Type", y = "Total Checkouts", fill = "Material Type") +
   ggtitle("Total Checkouts by Material Type")
 
-ggplotly(chart3)
+
 

@@ -2,9 +2,24 @@
 title: "The Future of Reading"
 output: html_document
 ---
-###library("dplyr")
-###library("stringr")
-###library("ggplot2")
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+# load necessary ALL libraries
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(plotly)
+
+# load data into dataframe called 'data'
+my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE) 
+
+# source all R files
+source('chart1_SPL.R')
+source('chart2_SPL.R')
+source('chart3_SPL.R')
+```
 
 ## Introduction
 
@@ -17,50 +32,6 @@ In this report, we will look at recent shifts and patterns from video discs, sou
 This report aims to provide a comprehensive overview of the current state of the book market and the growing trend towards ebooks. 
 
 ## Summary Information
-#####my_dataSet <-read.csv("~/Desktop/2022-2023-All-Checkouts-SPL-Data.csv", stringsAsFactors = FALSE)
-
-# Were people using a digital platform or physical platform for books?
-total_digital_usage <- my_dataSet %>% filter(UsageClass == "Digital")
-
-total_physical_usage <- my_dataSet %>% filter(UsageClass == "Physical")
-
-### How many total checkouts were there total from 2022-2023?
-total_checkouts <- my_dataSet %>% summarize(total_all = sum(Checkouts))
-
-### How many ebook checkouts were there from 2022-2023?
-total_ebook_checkouts <- my_dataSet %>% filter(MaterialType == "EBOOK") %>%
-summarize(total_ebook = sum(Checkouts))
-
-answer1 <- total_ebook_checkouts/ total_checkouts
-return(answer1)
-
-### How many physical book checkouts were there from 2022-2023?
-total_book_checkouts <- my_dataSet %>% filter(MaterialType == "BOOK") %>%
-summarize(total_book = sum(Checkouts))
-
-answer2 <- total_book_checkouts/ total_checkouts
-return(answer2)
-
-### How many audio book checkouts were there from 2022-2023?
-total_audiobook_checkouts <- my_dataSet %>% filter(MaterialType == "AUDIOBOOK") %>%
-summarize(total_audiobook = sum(Checkouts))
-
-answer3 <- total_audiobook_checkouts/ total_checkouts
-return(answer3)
-
-### How many sound disc checkouts were there from 2022-2023?
-total_sounddisc_checkouts <- my_dataSet %>% filter(MaterialType == "SOUNDDISC") %>%
-summarize(total_sounddisc = sum(Checkouts))
-
-answer4 <- total_sounddisc_checkouts/ total_checkouts
-return(answer4)
-
-### How many video disc checkouts were there from 2022-2023?
-total_videodisc_checkouts <- my_dataSet %>% filter(MaterialType == "VIDEODISC") %>%
-summarize(total_videodisc = sum(Checkouts))
-
-answer5 <- total_videodisc_checkouts/ total_checkouts 
-return(answer5)
 
 With our findings, it will help us draw closer to a conclusion. The first method finds
 out whether the item being checked out was either physical or digital (falls into one or the other). With this we can see that for digital items there was 1,331,024 and for physical it was
@@ -100,7 +71,6 @@ nrow(my_dataSet)
 This first chart here below shows the total checkouts of ebooks versus physical books in just 2022 alone. As we can see, without looking to0 closely here that there are various months where ebooks have had a higher checkout. Despite this, there were other times where physical book checkouts were higher. This chart is an indicator of a shift to a more digital platform that readers are leaning towards. 
 
 ``````{r, echo = FALSE, warning = FALSE, code = readLines("chart1_SPL.R")}
-chart1 
 ``````
 
 ### Second Trends Over Time Chart
@@ -108,7 +78,6 @@ chart1
 The chart below shows clearly the ups and downs between the months in checkouts. This map is great because we can visually see that before 2023, both sound disc and video discs are taking an downwards trajectory whereas. Additionally, this graph shows us that sound discs and video discs are slowly becoming less and less popular over time.
 
 ``````{r, echo = FALSE, code = readLines("chart2_SPL.R")}
-chart2
 ``````
 
 ### Visual 3
@@ -116,5 +85,4 @@ chart2
 With my last chart, I wanted to compare the total checkouts by all other forms. In this we can see that sound disc and video disc are slowly starting to fall off the radar. It appears that ebooks, books, and audio books, are the most common medium in which readers read with. Years ago, this bar graph would most likely look a lot more different than how it is now.
 
 ``````{r, echo = FALSE, code = readLines("chart3_SPL.R")}
-chart3
 ``````
